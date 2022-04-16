@@ -2,6 +2,9 @@ const LoginController = require('../controller/LoginController');
 const CreateClient = require('../controller/CreateClient');
 const CreateReservation = require('../controller/CreateReservation');
 
+const sendEmail = require('../utilities/email');
+const res = require('express/lib/response');
+
 module.exports = (app) => {
     
     app.get('/api',(req,res) => {
@@ -31,6 +34,19 @@ module.exports = (app) => {
     app.get('/user/finduser/id/:id',
         LoginController.findUser);
 
+    // app.post('/send', (req,res) => {
+    //     console.log(req.body);
+    //     res.send('received');
+    // })
 
+    //ENVIAR CORREO
+    app.post('/send-email', (req,res) => {
+        const {name, email, phone, message} = req.body;
+        console.log(req.body);
+        let respuesta = sendEmail();
+        res.send(respuesta);       
+    });
 
 }
+
+
