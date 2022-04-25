@@ -7,14 +7,14 @@ const res = require('express/lib/response');
 
 module.exports = (app) => {
     
-    app.get('/api',(req,res) => {
+    app.get('/api',(req, res) => {
         res.status(200).send('Mensaje enviado desde método GET');
     })
 
      /* ******************************************************************************************************  */
 
     //NUEVO CLIENTE EN LA PLATAFORMA, SOLO PIDE CORREO Y PASSWORD
-    app.post('/user/create/email/:email/pass/:pass',
+    app.post('/user/create',
         LoginController.createUsuario);
 
     //NUEVO CLIENTE YA REGISTRADO EN LA PLATAFORMA CON SU CORREO Y PASSWORD
@@ -31,7 +31,7 @@ module.exports = (app) => {
 
     app.get('/user/list', LoginController.list);
 
-    app.get('/user/finduser/id/:id',
+    app.get('/user/finduser/:email/:pass',
         LoginController.findUser);
 
     // app.post('/send', (req,res) => {
@@ -40,12 +40,17 @@ module.exports = (app) => {
     // })
 
     //ENVIAR CORREO
+    // app.post('/send-email', (req,res) => {
+    //     const {name, email, phone, message} = req.body;
+    //     console.log(req.body);
+    //     res.send(sendEmail());              
+    // })
+
     app.post('/send-email', (req,res) => {
         const {name, email, phone, message} = req.body;
         console.log(req.body);
-        let respuesta = sendEmail();
-        res.send(respuesta);       
-    });
+        res.send(sendEmail());              
+    })
 
 }
 
