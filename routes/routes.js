@@ -10,5 +10,15 @@ const sendEmail = require('../utilities/email');
 const LoginController = require('../controller/LoginController');
 const CreateClient = require('../controller/CreateClient');
 const CreateReservation = require('../controller/CreateReservation');
+const { send } = require('express/lib/response');
 
-router.post(`${ api.path } ${api.client.createUser}`, , CreateClient.newClient)
+router.get(`${api.path}`, (req, res) => {
+    res.status(200).send('Mensaje enviado desde método GET')})
+
+//NEW USER CREATION (NOT CLIENT) Only email and password
+router.post(`${api.path}${api.client.createUser}`, CreateClient.newUser)
+
+//NEW CLIENT CREATION AFTER User creation
+router.post(`${ api.path }${api.client.createInfoUser}`, CreateClient.newClient)
+
+module.exports = router;

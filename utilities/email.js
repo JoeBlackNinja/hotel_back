@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
-const email = async (email, pass, res ) => {
+const email = async (email, link) => {
   // contentHTML = `
   //   <h1>User information</h1>
   //     <ul>
@@ -23,16 +23,16 @@ const email = async (email, pass, res ) => {
   let info = await transporter.sendMail({
     from : 'luir.postman2022@gmail.com',
     to : `${email}`,
-    subject : "Correo de prueba hotel bootcamp madafaka",
-    text : `Bienvenue ${pass} at to Hostel MDFK`
+    subject : "Welcome to BackPacker's Hostel",
+    text : `Welcome to BackPacker's Hostel.\n
+            follow the next link for confirmation account: ${link}`
   });
 
-  console.log('Message sent', info.messageId);
-
-  let token = jwt.sign({email}, 'cantiLever', {
+  /* let token = jwt.sign({email}, 'cantiLever', {
     expiresIn : 1000
   })
-  return res.send({token});
+  return res.send({token}); */
+  return info.messageId; 
 };
 
 module.exports = email;
