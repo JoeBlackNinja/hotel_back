@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     out_date: DataTypes.DATE,
     cash: DataTypes.NUMERIC,
     transaction_number: DataTypes.STRING,
-    total: DataTypes.NUMERIC
+    total: DataTypes.NUMERIC,
+    id_client: DataTypes.INTEGER,
+    email: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'reservations',

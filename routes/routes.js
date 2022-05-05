@@ -21,4 +21,10 @@ router.post(`${api.path}${api.client.createUser}`, CreateClient.newUser)
 //NEW CLIENT CREATION AFTER User creation
 router.post(`${ api.path }${api.client.createInfoUser}`, CreateClient.newClient)
 
+//LOGIN
+router.get(`${api.path}${api.login}`, LoginController.loginMethod)
+
+//RESERVATION
+router.post(`${api.path}${api.client.reservation}`, CreateReservation.nuevaReservacion);
+
 module.exports = router;

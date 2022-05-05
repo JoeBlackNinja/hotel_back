@@ -4,6 +4,6 @@ module.exports = {
     client:{
         createUser:`/createUser`,
         createInfoUser:`/newClient`,
-        reservation:`/reservation`
+        reservation:`/createReservation`
     }
 }
