@@ -5,5 +5,8 @@ module.exports = {
         createUser:`/createUser`,
         createInfoUser:`/newClient`,
         reservation:`/createReservation`
+    },
+    services:{
+        survey: `/survey`
     }
 }

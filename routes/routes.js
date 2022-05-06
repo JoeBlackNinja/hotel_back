@@ -10,6 +10,7 @@ const sendEmail = require('../utilities/email');
 const LoginController = require('../controller/LoginController');
 const CreateClient = require('../controller/CreateClient');
 const CreateReservation = require('../controller/CreateReservation');
+const CreateSurvey = require('../controller/SurveyController');
 const { send } = require('express/lib/response');
 
 router.get(`${api.path}`, (req, res) => {
@@ -26,5 +27,8 @@ router.get(`${api.path}${api.login}`, LoginController.loginMethod)
 
 //RESERVATION
 router.post(`${api.path}${api.client.reservation}`, CreateReservation.nuevaReservacion);
+
+//SURVEY
+router.post(`${api.path}${api.services.survey}`, CreateSurvey.surveyCreate)
 
 module.exports = router;
