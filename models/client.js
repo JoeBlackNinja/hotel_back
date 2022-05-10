@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   client.init({
+    id:{
+      type: DataTypes.INTEGER,
+      primaryKey : true
+    },  
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     pass: DataTypes.STRING,

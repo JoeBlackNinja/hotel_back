@@ -2,50 +2,20 @@ const client = require("../models").client;
 const bcrypt = require('../utilities/encriptador');
 const tokenImport = require('../utilities/webtoken');
 const correo = require('../utilities/email');
-
-/* const newClient = async (req, res, next) => {
-  try {
-    const {
-      id,
-      name,
-      last_name,
-      address,
-      city,
-      state,
-      country,
-      cellphone,
-      email,
-      account_type,
-    } = req.body;
-
-    return (newClientReq = await client
-      .create({
-        name: name,
-        last_name: last_name,
-        address: address,
-        city: city,
-        state: state,
-        country: country,
-        cellphone: cellphone,
-        email: email,
-        account_type: account_type,
-      })
-      .then((usuario) => res.status(200).send(usuario)));
-  } catch (error) {
-    return (error) => res.status(400);
-  }
-}; */
+const randomFunction = require('../utilities/random')
 
 const newUser = async (req, res, next) => {
   try {
-    const { email, pass } = req.body;
+    const { email, pass, idclient } = req.body;     
+    const idGenerado = randomFunction(idclient);    
     const newUserReq = await client
       .create({
+        id: idGenerado,
         email: email,
         pass: pass,
-      })
-  
-    const envioCorreo = await correo(newUserReq.email, );
+      })    
+    console.log(newUserReq.dataValues.email)
+    const envioCorreo = await correo(newUserReq.dataValues.email,"Chucapsor");
     
     const cryptoObject = {
       id : newUserReq.dataValues.id,

@@ -1,5 +1,4 @@
 const client = require('../models').client;
-/* const client = require('pg/lib/native/client'); */
 const emailSending = require('../utilities/email');
 
 const tokenImport = require('../utilities/webtoken');
@@ -44,11 +43,8 @@ const loginMethod = async (req,res) => {
                 pass:pass
             }
         });
-
-        const token = await tokenImport(logeo.dataValues.id);
-
-        return res.status(200).json(token);
-
+    const token = await tokenImport(logeo.dataValues.id);
+    return res.status(200).json(logeo);
     } catch (error) {
         return res.status(400).send(error)
     }

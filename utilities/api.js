@@ -8,5 +8,8 @@ module.exports = {
     },
     services:{
         survey: `/survey`
+    },
+    find:{
+        findUser:`/consultClient`
     }
 }
