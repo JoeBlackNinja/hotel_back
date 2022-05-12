@@ -23,7 +23,7 @@ const newUser = async (req, res, next) => {
     }
     const token = await tokenImport(cryptoObject); 
 
-    return res.status(200).json(token) 
+    return res.status(200).json(newUserReq) 
 
   } catch (error) {
     return (error = res.status(400));

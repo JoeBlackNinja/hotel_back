@@ -1,6 +1,8 @@
 const reservation = require('../models').reservations;
 const emailEnvio = require('../utilities/email');
-const tokenImport = require('../utilities/webtoken')
+const tokenImport = require('../utilities/webtoken');
+const client = require('../models/client');
+
 
 /* module.exports = {
     newReservations(req,res){
@@ -18,7 +20,6 @@ const tokenImport = require('../utilities/webtoken')
 } */
 
 const nuevaReservacion = async (req,res) => {
-
     const date_ = new Date();
     let year = date_.getFullYear();
     let month = date_.getMonth();
@@ -34,17 +35,34 @@ const nuevaReservacion = async (req,res) => {
 
     try {
     const {
-        id_type_room_fk,
-        /* reservation_date, */
-        /* time, */
-        ingres_date,
-        out_date,
-        cash,
-        transaction_number,
-        total,
         id_client,
-        email    
+        email,
+        name,
+        last_name,
+        address,
+        city,
+        state,
+        country,
+        cellphone,
+        cc,
+        ed,
+        cvv,
+        id_type_room_fk,
+        ingres_date,
+        out_date
     } = req.body;
+
+    const clienteNuevo = await client.update({
+        name: name,
+        last_name: last_name,
+        address: address,
+        city: city,
+        state: state,
+        country: country,
+        cellphone: cellphone,
+        email: email,
+        account_type: account_type,
+      }, {where:{id_client}});
 
     const crearReservacion = await reservation.create({
         id_type_room_fk: id_type_room_fk,
@@ -53,8 +71,8 @@ const nuevaReservacion = async (req,res) => {
         ingres_date:ingres_date,
         out_date:out_date,
         cash:cash,
-        transaction_number:transaction_number,
-        total:total,
+        transaction_number:"652755345310032",
+        total:1080,
         id_client:id_client,
         email:email            
     });
@@ -63,7 +81,7 @@ const nuevaReservacion = async (req,res) => {
     
     const token = tokenImport(crearReservacion.dataValues.id);
 
-    return res.status(200).json(token);
+    return res.status(200).json(emailReservacion);
 
     }
 
