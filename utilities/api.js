@@ -7,7 +7,9 @@ module.exports = {
         reservation:`/createReservation`
     },
     services:{
-        survey: `/survey`
+        survey:`/survey`,
+        solChangePass:`/solChangePass`,
+        changePass:`/changePass`
     },
     find:{
         findUser:`/consultClient`
