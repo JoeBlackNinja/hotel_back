@@ -1,10 +1,9 @@
 const jwt = require('jsonwebtoken');
 
-const token = () => {
-    let token_ = jwt.sign('asd', 'ert', {
+const token = (userData) => {
+    return jwt.sign({userData}, 'Improving', {
         expiresIn : 10000
     })
-    return token_;
 } 
 
 module.exports = token;

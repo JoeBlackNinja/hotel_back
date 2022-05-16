@@ -1,9 +1,9 @@
-const usuario = require('../models').client;
+const client = require('../models').client;
 const emailSending = require('../utilities/email');
 
-const token_jwt = require('../utilities/webtoken');
+const tokenImport = require('../utilities/webtoken');
 
-module.exports = {
+/* module.exports = {
     createUsuario(req,res){
         const {email, pass} = req.body;
         return usuario.create({
@@ -14,6 +14,7 @@ module.exports = {
         .catch(error => res.status(400));
     },
 
+    
 
     list(_, res)
     {
@@ -31,4 +32,22 @@ module.exports = {
         }).then(usuario => res.status(200).send())
             .catch(error => res.status(400).send(error));
     }
+} */
+
+const loginMethod = async (req,res) => {
+    const {email, pass} = req.body;
+    try {
+        const logeo = await client.findOne({
+            where:{
+                email:email,
+                pass:pass
+            }
+        });
+    const token = await tokenImport(logeo.dataValues.id);
+    return res.status(200).json(logeo);
+    } catch (error) {
+        return res.status(400).send(error)
+    }
 }
+
+module.exports = {loginMethod};
